@@ -1,0 +1,19 @@
+services:
+  backend:
+    container_name: backend
+    build:
+      context: './backend'
+      target: 'prod'
+    restart: always
+    env_file:
+      - ./backend/.env.prod
+  frontend:
+    container_name: frontend
+    build:
+      context: './frontend'
+      target: 'prod'
+    restart: always
+    depends_on:
+      - backend
+    environment:
+      - PORT=3000
